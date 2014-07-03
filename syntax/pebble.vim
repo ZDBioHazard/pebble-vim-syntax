@@ -267,6 +267,11 @@ syntax keyword cFunction number_window_set_max number_window_set_min number_wind
 syntax keyword cFunction window_stack_contains_window window_stack_get_top_window window_stack_pop
 syntax keyword cFunction window_stack_pop_all window_stack_push window_stack_remove
 
+" status_t values
+" This isn't in the API reference, but it's defined in pebble.h, so I'm including it.
+syntax keyword cConstant S_SUCCESS E_ERROR E_UNKNOWN E_INTERNAL E_INVALID_ARGUMENT E_OUT_OF_MEMORY E_OUT_OF_STORAGE E_OUT_OF_RESOURCES
+syntax keyword cConstant E_RANGE E_DOES_NOT_EXIST E_INVALID_OPERATION E_BUSY S_TRUE S_FALSE S_NO_MORE_ITEMS S_NO_ACTION_REQUIRED
+
 " Set-up the highlight links
 if version >= 508
     highlight default link cTyoe     Type
