@@ -2,7 +2,7 @@
 " Language:    C with Pebble API
 " Author:      Ryan "ZDBioHazard" Turner
 " URL:         https://github.com/ZDBioHazard/pebble-vim-syntax
-" Last Change: 2014-05-12
+" Last Change: 2014-07-08
 
 if !exists("main_syntax")
     if version < 600
@@ -53,18 +53,18 @@ syntax keyword cConstant DATA_LOGGING_NOT_FOUND DATA_LOGGING_CLOSED DATA_LOGGING
 syntax keyword cFunction data_logging_create data_logging_finish data_logging_log
 
 " Dictionary
-syntax keyword cType Tuple Tuplet TupleType DictionaryResult DictionaryIterator
+syntax keyword cType Tuple Tuplet TupleType Dictionary DictionaryResult DictionaryIterator
 syntax keyword cType DictionaryKeyUpdatedCallback DictionarySerializeCallback
 syntax keyword cConstant DICT_OK DICT_NOT_ENOUGH_STORAGE DICT_INVALID_ARGS DICT_INTERNAL_INCONSISTENCY DICT_MALLOC_FAILED
 syntax keyword cConstant TUPLE_BYTE_ARRAY TUPLE_CSTRING TUPLE_UINT TUPLE_INT NULL_TUPLE
 syntax keyword cFunction dict_calc_buffer_size dict_calc_buffer_size_from_tuplets dict_find dict_merge
 syntax keyword cFunction dict_read_begin_from_buffer dict_read_first dict_read_next dict_serialize_tuplets
 syntax keyword cFunction dict_serialize_tuplets_to_buffer dict_serialize_tuplets_to_buffer_with_iter dict_size
-syntax keyword cFunction dict_write_begin dict_write_cstring dict_write_data dict_write_end dict_write_int
-syntax keyword cFunction dict_write_tuplet dict_write_uint8
+syntax keyword cFunction dict_write_begin dict_write_cstring dict_write_data dict_write_end dict_write_tuplet
+syntax keyword cFunction dict_write_int dict_write_uint8 dict_write_uint16 dict_write_uint32 dict_write_int8 dict_write_int16 dict_write_int32
 
 " AccelerometerService
-syntax keyword cType AccelDataHandler AccelData AccelSamplingRate AccelTapHandler
+syntax keyword cType AccelAxisType AccelDataHandler AccelData AccelSamplingRate AccelTapHandler
 syntax keyword cConstant ACCEL_AXIS_X ACCEL_AXIS_Y ACCEL_AXIS_Z
 syntax keyword cConstant ACCEL_SAMPLING_10HZ ACCEL_SAMPLING_25HZ ACCEL_SAMPLING_50HZ ACCEL_SAMPLING_100HZ
 syntax keyword cFunction accel_data_service_subscribe accel_data_service_unsubscribe accel_service_peek accel_service_set_samples_per_update
@@ -89,7 +89,7 @@ syntax keyword cFunction tick_timer_service_subscribe tick_timer_service_unsubsc
 " Logging
 syntax keyword cType AppLogLevel
 syntax keyword cConstant APP_LOG_LEVEL_ERROR APP_LOG_LEVEL_WARNING APP_LOG_LEVEL_INFO APP_LOG_LEVEL_DEBUG APP_LOG_LEVEL_DEBUG_VERBOSE
-syntax keyword cFunction app_log
+syntax keyword cFunction app_log APP_LOG
 
 " Math
 syntax keyword cConstant TRIG_MAX_ANGLE TRIG_MAX_RATIO
@@ -166,17 +166,18 @@ syntax keyword cFunction gpoint_equal grect_align grect_center_point grect_clip 
 syntax keyword cFunction grect_crop grect_equal grect_is_empty grect_standardize gsize_equal
 
 " Animation
-syntax keyword cType Animation AnimationCurve AnimationHandlers AnimationStartedHandler AnimationStoppedHandler
+syntax keyword cType Animation AnimationCurve AnimationHandlers AnimationStartedHandler AnimationStoppedHandler AnimationTimingFunction
 syntax keyword cType AnimationImplementation AnimationSetupImplementation AnimationTeardownImplementation AnimationUpdateImplementation
-syntax keyword cConstant AnimationCurveLinear AnimationCurveEaseIn AnimationCurveEaseOut AnimationCurveEaseInOut NumAnimationCurve
+syntax keyword cConstant AnimationCurveLinear AnimationCurveEaseIn AnimationCurveEaseOut AnimationCurveEaseInOut
 syntax keyword cConstant ANIMATION_DURATION_INFINITE ANIMATION_NORMALIZED_MAX ANIMATION_NORMALIZED_MIN
+syntax keyword cConstant NumAnimationCurve NUM_ANIMATION_CURVE
 syntax keyword cFunction animation_create animation_destroy animation_get_context animation_is_scheduled animation_schedule
 syntax keyword cFunction animation_set_curve animation_set_delay animation_set_duration animation_set_handlers
 syntax keyword cFunction animation_set_implementation animation_unschedule animation_unschedule_all
 
 " PropertyAnimation
-syntax keyword cType PropertyAnimation PropertyAnimationAccessors GPointReturn GRectReturn
-syntax keyword cType GPointGetter GRectGetter Int16Getter GPointSetter GRectSetter Int16Getter
+syntax keyword cType PropertyAnimation PropertyAnimationImplementation PropertyAnimationAccessors GPointReturn GRectReturn
+syntax keyword cType GPointGetter GRectGetter Int16Getter GPointSetter GRectSetter Int16Setter
 syntax keyword cFunction property_animation_create property_animation_create_layer_frame property_animation_destroy
 syntax keyword cFunction property_animation_update_gpoint property_animation_update_grect property_animation_update_int16
 
@@ -209,7 +210,7 @@ syntax keyword cType InverterLayer
 syntax keyword cFunction inverter_layer_create inverter_layer_destroy inverter_layer_get_layer
 
 " MenuLayer
-syntax keyword cType MenuLayer MenuIndex MenuLayerCallbacks MenuRowAlign
+syntax keyword cType MenuLayer MenuIndex MenuLayerCallbacks MenuRowAlign MenuCellSpan
 syntax keyword cType MenuLayerDrawHeaderCallback MenuLayerDrawRowCallback MenuLayerDrawSeparator MenuLayerGetCellHeightCallback
 syntax keyword cType MenuLayerGetHeaderHeightCallback MenuLayerGetNumberOfRowsInSectionsCallback MenuLayerGetNumberOfSectionsCallback
 syntax keyword cType MenuLayerGetSeparatorHeightCallback MenuLayerSelectCallback MenuLayerSelectionChangedCallback
@@ -222,6 +223,8 @@ syntax keyword cFunction menu_layer_set_selected_index menu_layer_set_selected_n
 " RotBitmapLayer
 syntax keyword cType RotBitmapLayer
 syntax keyword cFunction rot_bitmap_layer_create rot_bitmap_layer_increment_angle rot_bitmap_layer_set_angle
+syntax keyword cFunction rot_bitmap_layer_destroy rot_bitmap_layer_set_corner_clip_color rot_bitmap_layer_set_src_ic
+syntax keyword cFunction rot_bitmap_layer_set_compositing_mode
 
 " ScrollLayer
 syntax keyword cType ScrollLayer ScrollLayerCallback ScrollLayerCallbacks
@@ -269,8 +272,13 @@ syntax keyword cFunction window_stack_pop_all window_stack_push window_stack_rem
 
 " status_t values
 " This isn't in the API reference, but it's defined in pebble.h, so I'm including it.
+syntax keyword cType StatusCode status_t
 syntax keyword cConstant S_SUCCESS E_ERROR E_UNKNOWN E_INTERNAL E_INVALID_ARGUMENT E_OUT_OF_MEMORY E_OUT_OF_STORAGE E_OUT_OF_RESOURCES
 syntax keyword cConstant E_RANGE E_DOES_NOT_EXIST E_INVALID_OPERATION E_BUSY S_TRUE S_FALSE S_NO_MORE_ITEMS S_NO_ACTION_REQUIRED
+
+" Other things in pebble.h but not in the API documentation.
+syntax keyword cType ListNode GDrawState TextLayout
+syntax keyword cFunction time_ms
 
 " Set-up the highlight links
 if version >= 508
