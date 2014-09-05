@@ -282,7 +282,7 @@ syntax keyword cFunction time_ms
 
 " Set-up the highlight links
 if version >= 508
-    highlight default link cTyoe     Type
+    highlight default link cType     Type
     highlight default link cConstant Constant
     highlight default link cFunction Function
 endif
