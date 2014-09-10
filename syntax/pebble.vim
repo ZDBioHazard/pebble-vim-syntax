@@ -162,6 +162,7 @@ syntax keyword cConstant GAlignBottom GAlignRight GAlignBottomRight GAlignBottom
 syntax keyword cConstant GColorClear GColorBlack GColorWhite
 syntax keyword cConstant GCompOpAssign GCompOpAssignInverted GCompOpOr GCompOpAnd GCompOpClear GCompOpSet
 syntax keyword cFunction gbitmap_create_as_sub_bitmap gbitmap_create_with_data gbitmap_create_with_resource gbitmap_destroy
+syntax keyword cFunction gbitmap_create_blank
 syntax keyword cFunction gpoint_equal grect_align grect_center_point grect_clip grect_contains_point
 syntax keyword cFunction grect_crop grect_equal grect_is_empty grect_standardize gsize_equal
 
@@ -265,6 +266,7 @@ syntax keyword cFunction window_set_window_handlers window_single_click_subscrib
 syntax keyword cType NumberWindow NumberWindowCallback NumberWindowCallbacks
 syntax keyword cFunction number_window_create number_window_destroy number_window_get_value number_window_set_label
 syntax keyword cFunction number_window_set_max number_window_set_min number_window_set_step_size number_window_set_value
+syntax keyword cFunction number_window_get_window
 
 " Window Stack
 syntax keyword cFunction window_stack_contains_window window_stack_get_top_window window_stack_pop
