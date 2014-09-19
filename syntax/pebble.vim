@@ -54,8 +54,8 @@ syntax keyword cFunction data_logging_create data_logging_finish data_logging_lo
 
 " Data Structures
 syntax keyword cType Uuid
-syntax keyword cConstant UUID_STRING_BUFFER_LENGTH
-syntax keyword cFunction uuid_equal uuid_to_string UuidMakeFromBEBytes UuidMakeFromLEBytes
+syntax keyword cConstant UUID_SIZE UUID_STRING_BUFFER_LENGTH
+syntax keyword cFunction uuid_equal uuid_to_string UuidMake UuidMakeFromBEBytes UuidMakeFromLEBytes
 
 " Dictionary
 syntax keyword cType Tuple Tuplet TupleType Dictionary DictionaryResult DictionaryIterator
@@ -69,12 +69,18 @@ syntax keyword cFunction dict_write_begin dict_write_cstring dict_write_data dic
 syntax keyword cFunction dict_write_int dict_write_uint8 dict_write_uint16 dict_write_uint32 dict_write_int8 dict_write_int16 dict_write_int32
 
 " AccelerometerService
-syntax keyword cType AccelAxisType AccelDataHandler AccelData AccelSamplingRate AccelTapHandler
+syntax keyword cType AccelAxisType AccelDataHandler AccelData AccelSamplingRate AccelTapHandler AccelRawDataHandler AccelRawData
 syntax keyword cConstant ACCEL_AXIS_X ACCEL_AXIS_Y ACCEL_AXIS_Z
 syntax keyword cConstant ACCEL_SAMPLING_10HZ ACCEL_SAMPLING_25HZ ACCEL_SAMPLING_50HZ ACCEL_SAMPLING_100HZ
 syntax keyword cFunction accel_data_service_subscribe accel_data_service_unsubscribe accel_service_peek accel_service_set_samples_per_update
 syntax keyword cFunction accel_service_set_sampling_rate accel_tap_service_subscribe accel_tap_service_unsubscribe
 syntax keyword cFunction accel_raw_data_service_subscribe
+
+" CompassService
+syntax keyword cType MagData CompassStatus CompassHeading CompassHeadingData CompassHeadingHandler
+syntax keyword cFunction TRIANGLE_TO_DEG
+syntax keyword cFunction compass_service_subscribe compass_service_unsubscribe
+syntax keyword cFunction compass_service_set_heading_filter compass_service_peek
 
 " AppFocusService
 syntax keyword cType AppFocusHandler
@@ -194,7 +200,7 @@ syntax keyword cFunction property_animation_update_gpoint property_animation_upd
 " Clicks
 syntax keyword cType ClickRecognizerRef ClickConfigProvider ClickHandler ButtonId
 syntax keyword cConstant BUTTON_ID_BACK BUTTON_ID_UP BUTTON_ID_SELECT BUTTON_ID_DOWN NUM_BUTTONS
-syntax keyword cFunction click_number_of_clicks_counted click_recognizer_get_button_id
+syntax keyword cFunction click_number_of_clicks_counted click_recognizer_get_button_id click_recognizer_is_repeating
 
 " Layers
 syntax keyword cType Layer LayerUpdateProc
@@ -221,7 +227,7 @@ syntax keyword cFunction inverter_layer_create inverter_layer_destroy inverter_l
 
 " MenuLayer
 syntax keyword cType MenuLayer MenuIndex MenuLayerCallbacks MenuRowAlign MenuCellSpan
-syntax keyword cType MenuLayerDrawHeaderCallback MenuLayerDrawRowCallback MenuLayerDrawSeparator MenuLayerGetCellHeightCallback
+syntax keyword cType MenuLayerDrawHeaderCallback MenuLayerDrawRowCallback MenuLayerDrawSeparatorCallback MenuLayerGetCellHeightCallback
 syntax keyword cType MenuLayerGetHeaderHeightCallback MenuLayerGetNumberOfRowsInSectionsCallback MenuLayerGetNumberOfSectionsCallback
 syntax keyword cType MenuLayerGetSeparatorHeightCallback MenuLayerSelectCallback MenuLayerSelectionChangedCallback
 syntax keyword cConstant MenuRowAlignNone MenuRowAlignCenter MenuRowAlignTop MenuRowAlignBottom MENU_CELL_BASIC_HEADER_HEIGHT
