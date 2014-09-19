@@ -52,6 +52,11 @@ syntax keyword cConstant DATA_LOGGING_SUCCESS DATA_LOGGING_BUSY DATA_LOGGING_FUL
 syntax keyword cConstant DATA_LOGGING_NOT_FOUND DATA_LOGGING_CLOSED DATA_LOGGING_INVALID_PARAMS
 syntax keyword cFunction data_logging_create data_logging_finish data_logging_log
 
+" Data Structures
+syntax keyword cType Uuid
+syntax keyword cConstant UUID_STRING_BUFFER_LENGTH
+syntax keyword cFunction uuid_equal uuid_to_string UuidMakeFromBEBytes UuidMakeFromLEBytes
+
 " Dictionary
 syntax keyword cType Tuple Tuplet TupleType Dictionary DictionaryResult DictionaryIterator
 syntax keyword cType DictionaryKeyUpdatedCallback DictionarySerializeCallback
@@ -69,6 +74,7 @@ syntax keyword cConstant ACCEL_AXIS_X ACCEL_AXIS_Y ACCEL_AXIS_Z
 syntax keyword cConstant ACCEL_SAMPLING_10HZ ACCEL_SAMPLING_25HZ ACCEL_SAMPLING_50HZ ACCEL_SAMPLING_100HZ
 syntax keyword cFunction accel_data_service_subscribe accel_data_service_unsubscribe accel_service_peek accel_service_set_samples_per_update
 syntax keyword cFunction accel_service_set_sampling_rate accel_tap_service_subscribe accel_tap_service_unsubscribe
+syntax keyword cFunction accel_raw_data_service_subscribe
 
 " AppFocusService
 syntax keyword cType AppFocusHandler
@@ -94,6 +100,9 @@ syntax keyword cFunction app_log APP_LOG
 " Math
 syntax keyword cConstant TRIG_MAX_ANGLE TRIG_MAX_RATIO
 syntax keyword cFunction atan2_lookup cos_lookup sin_lookup
+
+" Memory Management
+syntax keyword cFunction heap_bytes_free heap_bytes_used
 
 " Resources
 syntax keyword cType ResHandle
@@ -161,7 +170,8 @@ syntax keyword cConstant GAlignCenter GAlignTopLeft GAlignTopRight GAlignTop GAl
 syntax keyword cConstant GAlignBottom GAlignRight GAlignBottomRight GAlignBottomLeft
 syntax keyword cConstant GColorClear GColorBlack GColorWhite
 syntax keyword cConstant GCompOpAssign GCompOpAssignInverted GCompOpOr GCompOpAnd GCompOpClear GCompOpSet
-syntax keyword cFunction gbitmap_create_as_sub_bitmap gbitmap_create_with_data gbitmap_create_with_resource gbitmap_destroy
+syntax keyword cFunction gbitmap_create_as_sub_bitmap gbitmap_create_with_data gbitmap_create_with_resource gbitmap_destroy 
+syntax keyword cFunction gbitmap_create_blank
 syntax keyword cFunction gpoint_equal grect_align grect_center_point grect_clip grect_contains_point
 syntax keyword cFunction grect_crop grect_equal grect_is_empty grect_standardize gsize_equal
 
@@ -265,6 +275,7 @@ syntax keyword cFunction window_set_window_handlers window_single_click_subscrib
 syntax keyword cType NumberWindow NumberWindowCallback NumberWindowCallbacks
 syntax keyword cFunction number_window_create number_window_destroy number_window_get_value number_window_set_label
 syntax keyword cFunction number_window_set_max number_window_set_min number_window_set_step_size number_window_set_value
+syntax keyword cFunction number_window_get_window
 
 " Window Stack
 syntax keyword cFunction window_stack_contains_window window_stack_get_top_window window_stack_pop
@@ -282,7 +293,7 @@ syntax keyword cFunction time_ms
 
 " Set-up the highlight links
 if version >= 508
-    highlight default link cTyoe     Type
+    highlight default link cType     Type
     highlight default link cConstant Constant
     highlight default link cFunction Function
 endif
