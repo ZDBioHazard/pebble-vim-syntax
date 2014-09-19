@@ -54,8 +54,8 @@ syntax keyword cFunction data_logging_create data_logging_finish data_logging_lo
 
 " Data Structures
 syntax keyword cType Uuid
-syntax keyword cConstant UUID_STRING_BUFFER_LENGTH UuidMakeFromBEBytes UuidMakeFromLEBytes
-syntax keyword cFunction uuid_equal uuid_to_string
+syntax keyword cConstant UUID_STRING_BUFFER_LENGTH
+syntax keyword cFunction uuid_equal uuid_to_string UuidMakeFromBEBytes UuidMakeFromLEBytes
 
 " Dictionary
 syntax keyword cType Tuple Tuplet TupleType Dictionary DictionaryResult DictionaryIterator
