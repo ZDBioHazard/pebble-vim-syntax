@@ -105,6 +105,11 @@ syntax keyword cFunction bluetooth_connection_service_peek bluetooth_connection_
 syntax keyword cType TickHandler
 syntax keyword cFunction tick_timer_service_subscribe tick_timer_service_unsubscribe
 
+" Launch Reason
+syntax keyword cType AppLaunchReason
+syntax keyword cConstant APP_LAUNCH_SYSTEM APP_LAUNCH_USER APP_LAUNCH_PHONE APP_LAUNCH_WAKEUP APP_LAUNCH_WORKER
+syntax keyword cFunction launch_reason
+
 " Logging
 syntax keyword cType AppLogLevel
 syntax keyword cConstant APP_LOG_LEVEL_ERROR APP_LOG_LEVEL_WARNING APP_LOG_LEVEL_INFO APP_LOG_LEVEL_DEBUG APP_LOG_LEVEL_DEBUG_VERBOSE
@@ -131,10 +136,15 @@ syntax keyword cFunction persist_write_bool persist_write_data persist_write_int
 syntax keyword cType AppTimer AppTimerCallback
 syntax keyword cFunction app_timer_cancel app_timer_register app_timer_reschedule psleep
 
+" Wakeup
+syntax keyword cType WakeupId WakeupHandler 
+syntax Keyword cFunction wakeup_cancel wakeup_cancel_all wakeup_get_launch_event wakeup_query wakeup_schedule wakeup_service_subscribe 
+
 " Wall Time
-syntax keyword cType TimeUnits
+syntax keyword cType TimeUnits WeekDay
 syntax keyword cConstant SECOND_UNIT MINUTE_UNIT HOUR_UNIT DAY_UNIT MONTH_UNIT YEAR_UNIT
-syntax keyword cFunction clock_copy_time_string clock_is_24h_style
+syntax keyword cConstant TODAY SUNDAY MONDAY TUESDAY WEDNESDAY THURSDAY FRIDAY SATURDAY 
+syntax keyword cFunction clock_copy_time_string clock_is_24h_style clock_is_timezone_set clock_to_timestamp
 
 " WatchInfo
 syntax keyword cType WatchInfoColor WatchInfoVersion WatchInfoModel
