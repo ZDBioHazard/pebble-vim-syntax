@@ -138,7 +138,7 @@ syntax keyword cFunction app_timer_cancel app_timer_register app_timer_reschedul
 
 " Wakeup
 syntax keyword cType WakeupId WakeupHandler 
-syntax Keyword cFunction wakeup_cancel wakeup_cancel_all wakeup_get_launch_event wakeup_query wakeup_schedule wakeup_service_subscribe 
+syntax keyword cFunction wakeup_cancel wakeup_cancel_all wakeup_get_launch_event wakeup_query wakeup_schedule wakeup_service_subscribe 
 
 " Wall Time
 syntax keyword cType TimeUnits WeekDay
