@@ -75,6 +75,9 @@ syntax keyword cFunction dict_serialize_tuplets_to_buffer dict_serialize_tuplets
 syntax keyword cFunction dict_write_begin dict_write_cstring dict_write_data dict_write_end dict_write_tuplet
 syntax keyword cFunction dict_write_int dict_write_uint8 dict_write_uint16 dict_write_uint32 dict_write_int8 dict_write_int16 dict_write_int32
 
+" Internationalization
+syntax keyword cFunction i18n_get_system_locale
+
 " AccelerometerService
 syntax keyword cType AccelAxisType AccelDataHandler AccelData AccelSamplingRate AccelTapHandler AccelRawDataHandler AccelRawData
 syntax keyword cConstant ACCEL_AXIS_X ACCEL_AXIS_Y ACCEL_AXIS_Z
