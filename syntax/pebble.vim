@@ -51,7 +51,6 @@ syntax keyword cConstant APP_WORKER_RESULT_SUCCESS APP_WORKER_RESULT_NO_WORKER A
 syntax keyword cConstant APP_WORKER_RESULT_ALREADY_RUNNING APP_WORKER_RESULT_ASKING_CONFIRMATION
 syntax keyword cFunction app_worker_is_running app_worker_kill app_worker_launch app_worker_message_subscribe app_worker_message_unsubscribe
 syntax keyword cFunction app_worker_send_message
-
 " DataLogging
 syntax keyword cType DataLoggingSessionRef DataLoggingItemType DataLoggingResult
 syntax keyword cConstant DATA_LOGGING_BYTE_ARRAY DATA_LOGGING_UINT DATA_LOGGING_INT
@@ -111,7 +110,8 @@ syntax keyword cFunction tick_timer_service_subscribe tick_timer_service_unsubsc
 " Launch Reason
 syntax keyword cType AppLaunchReason
 syntax keyword cConstant APP_LAUNCH_SYSTEM APP_LAUNCH_USER APP_LAUNCH_PHONE APP_LAUNCH_WAKEUP APP_LAUNCH_WORKER
-syntax keyword cFunction launch_reason
+syntax keyword cFunction launch_reason launch_get_args
+
 
 " Logging
 syntax keyword cType AppLogLevel
