@@ -197,6 +197,7 @@ syntax keyword cFunction fonts_get_system_font fonts_load_custom_font fonts_unlo
 syntax keyword cType GContext
 syntax keyword cFunction graphics_context_set_compositing_mode graphics_context_set_fill_color
 syntax keyword cFunction graphics_context_set_stroke_color graphics_context_set_text_color
+syntax keyword cFunction graphics_context_set_antialiased graphics_context_set_stroke_width 
 
 " Graphics Types
 syntax keyword cType GBitmap GPoint GRect GSize GAlign GColor GCompOp
