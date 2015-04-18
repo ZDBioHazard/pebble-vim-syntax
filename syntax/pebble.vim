@@ -211,7 +211,6 @@ syntax keyword cConstant FONT_KEY_BITHAM_18_LIGHT_SUBSET
 syntax keyword cConstant FONT_KEY_BITHAM_34_LIGHT_SUBSET
 syntax keyword cConstant FONT_KEY_ROBOTO_CONDENSED_21
 syntax keyword cConstant FONT_KEY_ROBOTO_BOLD_SUBSET_49
-A
 syntax keyword cConstant FONT_KEY_DROID_SERIF_28_BOLD
 syntax keyword cFunction fonts_get_system_font fonts_load_custom_font fonts_unload_custom_font
 
@@ -299,7 +298,6 @@ syntax keyword cFunction bitmap_layer_create bitmap_layer_destroy bitmap_layer_g
 syntax keyword cFunction bitmap_layer_set_alignment bitmap_layer_set_background_color bitmap_layer_set_bitmap bitmap_layer_set_compositing_mode
 
 " InverterLayer
-A
 syntax keyword cType InverterLayer
 syntax keyword cFunction inverter_layer_create inverter_layer_destroy inverter_layer_get_layer
 
