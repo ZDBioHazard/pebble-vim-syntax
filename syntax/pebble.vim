@@ -247,7 +247,7 @@ syntax keyword cFunction gbitmap_create_as_sub_bitmap gbitmap_create_with_data g
 syntax keyword cFunction gbitmap_create_blank
 syntax keyword cFunction gpoint_equal grect_align grect_center_point grect_clip grect_contains_point
 syntax keyword cFunction grect_crop grect_equal grect_is_empty grect_standardize gsize_equal
-syntax keyword cFunction GColorEq GColorFromHEX GColorFromRGB
+syntax keyword cFunction gcolor_equal GColorFromHEX GColorFromRGB
 
 " Animation
 syntax keyword cType Animation AnimationCurve AnimationHandlers AnimationStartedHandler AnimationStoppedHandler AnimationCurveFunction
@@ -297,7 +297,7 @@ syntax keyword cType BitmapLayer
 syntax keyword cFunction bitmap_layer_create bitmap_layer_destroy bitmap_layer_get_bitmap bitmap_layer_get_layer
 syntax keyword cFunction bitmap_layer_set_alignment bitmap_layer_set_background_color bitmap_layer_set_bitmap bitmap_layer_set_compositing_mode
 
-" InverterLayer
+" InverterLayer (deprecated from 3.0DP9)
 syntax keyword cType InverterLayer
 syntax keyword cFunction inverter_layer_create inverter_layer_destroy inverter_layer_get_layer
 
@@ -330,6 +330,7 @@ syntax keyword cFunction scroll_layer_set_context scroll_layer_set_frame scroll_
 syntax keyword cType SimpleMenuLayer SimpleMenuItem SimpleMenuSection SimpleMenuLayerSelectCallback
 syntax keyword cFunction simple_menu_layer_create simple_menu_layer_destroy simple_menu_layer_get_layer simple_menu_layer_get_menu_layer
 syntax keyword cFunction simple_menu_layer_get_selected_index simple_menu_layer_set_selected_index
+syntax keyword cFunction menu_layer_set_normal_colors menu_layer_set_highlight_colors
 
 " TextLayer
 syntax keyword cType TextLayer
