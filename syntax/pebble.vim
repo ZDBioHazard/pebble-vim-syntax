@@ -1,8 +1,9 @@
 " Vim syntax file
 " Language:    C with Pebble API
-" Author:      Ryan "ZDBioHazard" Turner
-" URL:         https://github.com/ZDBioHazard/pebble-vim-syntax
-" Last Change: 2014-07-08
+" Forked From: https://github.com/ZDBioHazard/pebble-vim-syntax
+" Author:      Andrew J. Kim
+" URL:         https://github.com/andrwj/pebble-vim-syntax
+" Last Change: 2015-05-02
 
 if !exists("main_syntax")
     if version < 600
@@ -17,8 +18,8 @@ endif
 runtime! syntax/c.vim
 
 "
-" This syntax file is designed for SDK version 2.0
-" https://developer.getpebble.com/2/api-reference/
+" This syntax file is designed for SDK version 3.0
+" https://developer.getpebble.com/docs/
 "
 " The 'Standard C' section is left out because it's not Pebble-specific.
 " Use another supplemental syntax file if you want that stuff too.
@@ -297,10 +298,6 @@ syntax keyword cType BitmapLayer
 syntax keyword cFunction bitmap_layer_create bitmap_layer_destroy bitmap_layer_get_bitmap bitmap_layer_get_layer
 syntax keyword cFunction bitmap_layer_set_alignment bitmap_layer_set_background_color bitmap_layer_set_bitmap bitmap_layer_set_compositing_mode
 
-" InverterLayer (deprecated from 3.0DP9)
-syntax keyword cType InverterLayer
-syntax keyword cFunction inverter_layer_create inverter_layer_destroy inverter_layer_get_layer
-
 " MenuLayer
 syntax keyword cType MenuLayer MenuIndex MenuLayerCallbacks MenuRowAlign MenuCellSpan
 syntax keyword cType MenuLayerDrawHeaderCallback MenuLayerDrawRowCallback MenuLayerDrawSeparatorCallback MenuLayerGetCellHeightCallback
@@ -331,6 +328,13 @@ syntax keyword cType SimpleMenuLayer SimpleMenuItem SimpleMenuSection SimpleMenu
 syntax keyword cFunction simple_menu_layer_create simple_menu_layer_destroy simple_menu_layer_get_layer simple_menu_layer_get_menu_layer
 syntax keyword cFunction simple_menu_layer_get_selected_index simple_menu_layer_set_selected_index
 syntax keyword cFunction menu_layer_set_normal_colors menu_layer_set_highlight_colors
+
+" A
+" StatusBarLayer
+syntax keyword cType StatusBarLayer
+syntax keyword cConstant StatusBarLayerSeparatorMode STATUS_BAR_LAYER_HEIGHT
+syntax keyword cFunction status_bar_layer_create status_bar_layer_destroy status_bar_layer_get_layer status_bar_layer_get_background_color
+syntax keyword cFunction status_bar_layer_get_foreground_color status_bar_layer_set_colors status_bar_layer_set_separator_mode
 
 " TextLayer
 syntax keyword cType TextLayer
@@ -375,7 +379,7 @@ syntax keyword cType ListNode GDrawState TextLayout
 syntax keyword cFunction time_ms
 
 "SDK 3
-syntax keyword cConstant GAlignCenter PBL_PLATFORM_BASALT PBL_PLATFORM_APLITE
+syntax keyword cConstant GAlignCenter PBL_PLATFORM_BASALT PBL_PLATFORM_APLITE PBL_SDK_2 PBL_SDK_3
 
 " Set-up the highlight links
 if version >= 508
