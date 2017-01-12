@@ -145,13 +145,13 @@ syntax keyword cType AppTimer AppTimerCallback
 syntax keyword cFunction app_timer_cancel app_timer_register app_timer_reschedule psleep
 
 " Wakeup
-syntax keyword cType WakeupId WakeupHandler 
-syntax keyword cFunction wakeup_cancel wakeup_cancel_all wakeup_get_launch_event wakeup_query wakeup_schedule wakeup_service_subscribe 
+syntax keyword cType WakeupId WakeupHandler
+syntax keyword cFunction wakeup_cancel wakeup_cancel_all wakeup_get_launch_event wakeup_query wakeup_schedule wakeup_service_subscribe
 
 " Wall Time
 syntax keyword cType TimeUnits WeekDay
 syntax keyword cConstant SECOND_UNIT MINUTE_UNIT HOUR_UNIT DAY_UNIT MONTH_UNIT YEAR_UNIT
-syntax keyword cConstant TODAY SUNDAY MONDAY TUESDAY WEDNESDAY THURSDAY FRIDAY SATURDAY 
+syntax keyword cConstant TODAY SUNDAY MONDAY TUESDAY WEDNESDAY THURSDAY FRIDAY SATURDAY
 syntax keyword cFunction clock_copy_time_string clock_is_24h_style clock_is_timezone_set clock_to_timestamp
 
 " WatchInfo
@@ -182,9 +182,9 @@ syntax keyword cConstant GTextOverflowModeWordWrap GTextOverflowModeTrailingElli
 syntax keyword cFunction graphics_draw_text graphics_text_layout_get_content_size
 
 " Draw Commands
-syntax keyword cType GDrawCommandImage GDrawCommand GDrawCommandFrame GDrawCommandList GDrawCommandSequence 
+syntax keyword cType GDrawCommandImage GDrawCommand GDrawCommandFrame GDrawCommandList GDrawCommandSequence
 syntax keyword cType GDrawCommandListIteratorCb
-syntax keyword cConstant GDrawCommandType 
+syntax keyword cConstant GDrawCommandType
 syntax keyword cFunction gdraw_command_draw gdraw_command_frame_draw gdraw_command_frame_get_duration
 syntax keyword cFunction gdraw_command_frame_set_duration gdraw_command_get_fill_color gdraw_command_get_hidden
 syntax keyword cFunction gdraw_command_get_num_points gdraw_command_get_path_open gdraw_command_get_point
@@ -198,7 +198,7 @@ syntax keyword cFunction gdraw_command_sequence_get_bounds_size gdraw_command_se
 syntax keyword cFunction gdraw_command_sequence_get_num_frames gdraw_command_sequence_get_play_count gdraw_command_sequence_get_total_duration
 syntax keyword cFunction gdraw_command_sequence_set_bounds_size gdraw_command_sequence_set_play_count gdraw_command_set_fill_color
 syntax keyword cFunction gdraw_command_set_hidden gdraw_command_set_path_open gdraw_command_set_point
-syntax keyword cFunction gdraw_command_set_radius gdraw_command_set_stroke_color 
+syntax keyword cFunction gdraw_command_set_radius gdraw_command_set_stroke_color
 
 
 " Fonts
@@ -223,7 +223,7 @@ syntax keyword cFunction fonts_get_system_font fonts_load_custom_font fonts_unlo
 syntax keyword cType GContext
 syntax keyword cFunction graphics_context_set_compositing_mode graphics_context_set_fill_color
 syntax keyword cFunction graphics_context_set_stroke_color graphics_context_set_text_color
-syntax keyword cFunction graphics_context_set_antialiased graphics_context_set_stroke_width 
+syntax keyword cFunction graphics_context_set_antialiased graphics_context_set_stroke_width
 
 " Graphics Types
 syntax keyword cType GBitmap GPoint GRect GSize GAlign GColor GCompOp
@@ -369,7 +369,7 @@ syntax keyword cFunction window_create window_destroy window_get_click_config_co
 syntax keyword cFunction window_get_fullscreen window_get_root_layer window_get_user_data window_is_loaded
 syntax keyword cFunction window_long_click_subscribe window_multi_click_subscribe window_raw_click_subscribe
 syntax keyword cFunction window_set_background_color window_set_click_config_provider window_set_click_config_provider_with_context
-syntax keyword cFunction window_set_click_context window_set_fullscreen window_set_status_bar_icon window_set_user_data
+syntax keyword cFunction window_set_click_context window_set_fullscreen window_set_user_data
 syntax keyword cFunction window_set_window_handlers window_single_click_subscribe window_single_repeating_click_subscribe
 
 " NumberWindow
