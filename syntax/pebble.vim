@@ -252,7 +252,7 @@ syntax keyword cFunction gbitmap_create_as_sub_bitmap gbitmap_create_with_data g
 syntax keyword cFunction gbitmap_create_blank gcolor_legible_over
 syntax keyword cFunction gpoint_equal grect_align grect_center_point grect_clip grect_contains_point
 syntax keyword cFunction grect_crop grect_equal grect_is_empty grect_standardize gsize_equal
-syntax keyword cFunction gcolor_equal GColorFromHEX GColorFromRGB
+syntax keyword cFunction gcolor_equal GColorFromHEX GColorFromRGB gcolor_legible_over
 
 " Animation
 syntax keyword cType Animation AnimationCurve AnimationHandlers AnimationStartedHandler AnimationStoppedHandler AnimationCurveFunction
