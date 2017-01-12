@@ -92,7 +92,7 @@ syntax keyword cFunction  app_focus_service_subscribe app_focus_service_unsubscr
 
 " CompassService
 syntax keyword cType MagData CompassStatus CompassHeading CompassHeadingData CompassHeadingHandler
-syntax keyword cFunction TRIANGLE_TO_DEG
+syntax keyword cFunction TRIGANGLE_TO_DEG
 syntax keyword cFunction compass_service_subscribe compass_service_unsubscribe
 syntax keyword cFunction compass_service_set_heading_filter compass_service_peek
 
@@ -173,7 +173,8 @@ syntax keyword cConstant GCornersAll GCornersTop GCornersBottom GCornersLeft GCo
 syntax keyword cFunction graphics_draw_bitmap_in_rect graphics_draw_circle graphics_draw_line graphics_draw_pixel
 syntax keyword cFunction graphics_draw_rect graphics_draw_round_rect graphics_fill_circle graphics_fill_rect
 syntax keyword cFunction graphics_capture_frame_buffer graphics_release_frame_buffer graphics_frame_buffer_is_captured
-syntax keyword cFunction graphics_draw_rotated_bitmap
+syntax keyword cFunction graphics_draw_rotated_bitmap graphics_fill_radial graphics_draw_arc DEG_TO_TRIGANGLE
+syntax keyword cFunction grect_centered_from_polar gpoint_from_polar graphics_capture_frame_buffer_format
 
 " Drawing Text
 syntax keyword cType GTextOverflowMode GTextAlignment GTextLayoutCacheRef
@@ -227,6 +228,8 @@ syntax keyword cFunction graphics_context_set_antialiased graphics_context_set_s
 
 " Graphics Types
 syntax keyword cType GBitmap GPoint GRect GSize GAlign GColor GCompOp
+syntax keyword cType GBitmapFormat GBitmapFormat1Bit GBitmapFormat8Bit GBitmapFormat1BitPalette GBitmapFormat2BitPalette
+syntax keyword cType GBitmapFormat4BitPalette GBitmapFormat8BitCircular
 syntax keyword cConstant GPointZero GRectZero GSizeZero
 syntax keyword cConstant GAlignCenter GAlignTopLeft GAlignTopRight GAlignTop GAlignLeft
 syntax keyword cConstant GAlignBottom GAlignRight GAlignBottomRight GAlignBottomLeft
@@ -253,6 +256,7 @@ syntax keyword cFunction gbitmap_create_blank gcolor_legible_over
 syntax keyword cFunction gpoint_equal grect_align grect_center_point grect_clip grect_contains_point
 syntax keyword cFunction grect_crop grect_equal grect_is_empty grect_standardize gsize_equal
 syntax keyword cFunction gcolor_equal GColorFromHEX GColorFromRGB gcolor_legible_over
+syntax keyword cFunction gbitmap_get_data_row_info
 
 " Animation
 syntax keyword cType Animation AnimationCurve AnimationHandlers AnimationStartedHandler AnimationStoppedHandler AnimationCurveFunction
@@ -321,7 +325,7 @@ syntax keyword cConstant MenuRowAlignNone MenuRowAlignCenter MenuRowAlignTop Men
 syntax keyword cFunction menu_cell_basic_draw menu_cell_basic_header_draw menu_cell_title_draw menu_index_compare menu_layer_create
 syntax keyword cFunction menu_layer_destroy menu_layer_get_layer menu_layer_get_scroll_layer menu_layer_get_selected_index
 syntax keyword cFunction menu_layer_reload_data menu_layer_set_callbacks menu_layer_set_click_config_onto_window
-syntax keyword cFunction menu_layer_set_selected_index menu_layer_set_selected_next
+syntax keyword cFunction menu_layer_set_selected_index menu_layer_set_selected_next menu_layer_set_center_focused
 
 " RotBitmapLayer
 syntax keyword cType RotBitmapLayer
@@ -330,12 +334,18 @@ syntax keyword cFunction rot_bitmap_layer_destroy rot_bitmap_layer_set_corner_cl
 syntax keyword cFunction rot_bitmap_layer_set_compositing_mode
 
 " ScrollLayer
-syntax keyword cType ScrollLayer ScrollLayerCallback ScrollLayerCallbacks
+syntax keyword cType ScrollLayer ScrollLayerCallback ScrollLayerCallbacks ContentIndicatorConfig ContentIndicatorDirection
+syntax keyword cType ContentIndicator
 syntax keyword cFunction scroll_layer_add_child scroll_layer_create scroll_layer_destroy scroll_layer_get_content_offset
 syntax keyword cFunction scroll_layer_get_content_size scroll_layer_get_layer scroll_layer_get_shadow_hidden
 syntax keyword cFunction scroll_layer_scroll_down_click_handler scroll_layer_scroll_up_click_handler scroll_layer_set_callbacks
 syntax keyword cFunction scroll_layer_set_click_config_onto_window scroll_layer_set_content_offset scroll_layer_set_content_size
 syntax keyword cFunction scroll_layer_set_context scroll_layer_set_frame scroll_layer_set_shadow_hidden
+syntax keyword cFunction scroll_layer_get_content_indicator scroll_layer_get_paging scroll_layer_set_paging
+syntax keyword cFunction content_indicator_create content_indicator_destroy content_indicator_configure_direction
+syntax keyword cFunction content_indicator_get_content_available content_indicator_set_content_available
+
+
 
 " SimpleMenuLayer
 syntax keyword cType SimpleMenuLayer SimpleMenuItem SimpleMenuSection SimpleMenuLayerSelectCallback
@@ -410,8 +420,10 @@ syntax keyword cConstant E_RANGE E_DOES_NOT_EXIST E_INVALID_OPERATION E_BUSY S_T
 syntax keyword cType ListNode GDrawState TextLayout
 syntax keyword cFunction time_ms
 
-"SDK 3
 syntax keyword cConstant GAlignCenter PBL_PLATFORM_BASALT PBL_PLATFORM_APLITE PBL_SDK_2 PBL_SDK_3
+syntax keyword cConstant PBL_PBL_ROUND PBL_RECT PBL_PLATFORM_CHALK
+syntax keyword cConstant PBL_IF_ROUND_ELSE, PBL_IF_RECT_ELSE, PBL_IF_COLOR_ELSE PBL_IF_BW_ELSE
+
 
 " Set-up the highlight links
 if version >= 508
