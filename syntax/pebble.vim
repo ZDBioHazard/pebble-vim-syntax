@@ -1,8 +1,9 @@
 " Vim syntax file
 " Language:    C with Pebble API
-" Author:      Ryan "ZDBioHazard" Turner
-" URL:         https://github.com/ZDBioHazard/pebble-vim-syntax
-" Last Change: 2014-07-08
+" Forked From: https://github.com/ZDBioHazard/pebble-vim-syntax
+" Author:      Andrew J. Kim
+" URL:         https://github.com/andrwj/pebble-vim-syntax
+" Last Change: 2015-05-02
 
 if !exists("main_syntax")
     if version < 600
@@ -17,8 +18,8 @@ endif
 runtime! syntax/c.vim
 
 "
-" This syntax file is designed for SDK version 2.0
-" https://developer.getpebble.com/2/api-reference/
+" This syntax file is designed for SDK version 3.0
+" https://developer.getpebble.com/docs/
 "
 " The 'Standard C' section is left out because it's not Pebble-specific.
 " Use another supplemental syntax file if you want that stuff too.
@@ -51,7 +52,6 @@ syntax keyword cConstant APP_WORKER_RESULT_SUCCESS APP_WORKER_RESULT_NO_WORKER A
 syntax keyword cConstant APP_WORKER_RESULT_ALREADY_RUNNING APP_WORKER_RESULT_ASKING_CONFIRMATION
 syntax keyword cFunction app_worker_is_running app_worker_kill app_worker_launch app_worker_message_subscribe app_worker_message_unsubscribe
 syntax keyword cFunction app_worker_send_message
-
 " DataLogging
 syntax keyword cType DataLoggingSessionRef DataLoggingItemType DataLoggingResult
 syntax keyword cConstant DATA_LOGGING_BYTE_ARRAY DATA_LOGGING_UINT DATA_LOGGING_INT
@@ -75,6 +75,9 @@ syntax keyword cFunction dict_serialize_tuplets_to_buffer dict_serialize_tuplets
 syntax keyword cFunction dict_write_begin dict_write_cstring dict_write_data dict_write_end dict_write_tuplet
 syntax keyword cFunction dict_write_int dict_write_uint8 dict_write_uint16 dict_write_uint32 dict_write_int8 dict_write_int16 dict_write_int32
 
+" Internationalization
+syntax keyword cFunction i18n_get_system_locale
+
 " AccelerometerService
 syntax keyword cType AccelAxisType AccelDataHandler AccelData AccelSamplingRate AccelTapHandler AccelRawDataHandler AccelRawData
 syntax keyword cConstant ACCEL_AXIS_X ACCEL_AXIS_Y ACCEL_AXIS_Z
@@ -83,9 +86,13 @@ syntax keyword cFunction accel_data_service_subscribe accel_data_service_unsubsc
 syntax keyword cFunction accel_service_set_sampling_rate accel_tap_service_subscribe accel_tap_service_unsubscribe
 syntax keyword cFunction accel_raw_data_service_subscribe
 
+"AppFocusService
+syntax keyword cType  AppFocusHandlers AppFocusHandler
+syntax keyword cFunction  app_focus_service_subscribe app_focus_service_unsubscribe app_focus_service_subscribe_handlers
+
 " CompassService
 syntax keyword cType MagData CompassStatus CompassHeading CompassHeadingData CompassHeadingHandler
-syntax keyword cFunction TRIANGLE_TO_DEG
+syntax keyword cFunction TRIGANGLE_TO_DEG
 syntax keyword cFunction compass_service_subscribe compass_service_unsubscribe
 syntax keyword cFunction compass_service_set_heading_filter compass_service_peek
 
@@ -104,6 +111,12 @@ syntax keyword cFunction bluetooth_connection_service_peek bluetooth_connection_
 " TickTimerService
 syntax keyword cType TickHandler
 syntax keyword cFunction tick_timer_service_subscribe tick_timer_service_unsubscribe
+
+" Launch Reason
+syntax keyword cType AppLaunchReason
+syntax keyword cConstant APP_LAUNCH_SYSTEM APP_LAUNCH_USER APP_LAUNCH_PHONE APP_LAUNCH_WAKEUP APP_LAUNCH_WORKER
+syntax keyword cFunction launch_reason launch_get_args
+
 
 " Logging
 syntax keyword cType AppLogLevel
@@ -131,10 +144,15 @@ syntax keyword cFunction persist_write_bool persist_write_data persist_write_int
 syntax keyword cType AppTimer AppTimerCallback
 syntax keyword cFunction app_timer_cancel app_timer_register app_timer_reschedule psleep
 
+" Wakeup
+syntax keyword cType WakeupId WakeupHandler
+syntax keyword cFunction wakeup_cancel wakeup_cancel_all wakeup_get_launch_event wakeup_query wakeup_schedule wakeup_service_subscribe
+
 " Wall Time
-syntax keyword cType TimeUnits
+syntax keyword cType TimeUnits WeekDay
 syntax keyword cConstant SECOND_UNIT MINUTE_UNIT HOUR_UNIT DAY_UNIT MONTH_UNIT YEAR_UNIT
-syntax keyword cFunction clock_copy_time_string clock_is_24h_style
+syntax keyword cConstant TODAY SUNDAY MONDAY TUESDAY WEDNESDAY THURSDAY FRIDAY SATURDAY
+syntax keyword cFunction clock_copy_time_string clock_is_24h_style clock_is_timezone_set clock_to_timestamp
 
 " WatchInfo
 syntax keyword cType WatchInfoColor WatchInfoVersion WatchInfoModel
@@ -155,12 +173,34 @@ syntax keyword cConstant GCornersAll GCornersTop GCornersBottom GCornersLeft GCo
 syntax keyword cFunction graphics_draw_bitmap_in_rect graphics_draw_circle graphics_draw_line graphics_draw_pixel
 syntax keyword cFunction graphics_draw_rect graphics_draw_round_rect graphics_fill_circle graphics_fill_rect
 syntax keyword cFunction graphics_capture_frame_buffer graphics_release_frame_buffer graphics_frame_buffer_is_captured
+syntax keyword cFunction graphics_draw_rotated_bitmap graphics_fill_radial graphics_draw_arc DEG_TO_TRIGANGLE
+syntax keyword cFunction grect_centered_from_polar gpoint_from_polar graphics_capture_frame_buffer_format
 
 " Drawing Text
 syntax keyword cType GTextOverflowMode GTextAlignment GTextLayoutCacheRef
 syntax keyword cConstant GTextAlignmentLeft GTextAlignmentCenter GTextAlignmentRight
 syntax keyword cConstant GTextOverflowModeWordWrap GTextOverflowModeTrailingEllipsis GTextOverflowModeFill
 syntax keyword cFunction graphics_draw_text graphics_text_layout_get_content_size
+
+" Draw Commands
+syntax keyword cType GDrawCommandImage GDrawCommand GDrawCommandFrame GDrawCommandList GDrawCommandSequence
+syntax keyword cType GDrawCommandListIteratorCb
+syntax keyword cConstant GDrawCommandType
+syntax keyword cFunction gdraw_command_draw gdraw_command_frame_draw gdraw_command_frame_get_duration
+syntax keyword cFunction gdraw_command_frame_set_duration gdraw_command_get_fill_color gdraw_command_get_hidden
+syntax keyword cFunction gdraw_command_get_num_points gdraw_command_get_path_open gdraw_command_get_point
+syntax keyword cFunction gdraw_command_get_radius gdraw_command_get_stroke_color gdraw_command_get_stroke_width
+syntax keyword cFunction gdraw_command_get_type gdraw_command_image_clone gdraw_command_image_create_with_resource
+syntax keyword cFunction gdraw_command_image_destroy gdraw_command_image_draw gdraw_command_image_get_bounds_size
+syntax keyword cFunction gdraw_command_image_get_command_list gdraw_command_image_set_bounds_size gdraw_command_list_draw
+syntax keyword cFunction gdraw_command_list_get_command gdraw_command_list_get_num_commands gdraw_command_list_iterate
+syntax keyword cFunction gdraw_command_sequence_clone gdraw_command_sequence_create_with_resource gdraw_command_sequence_destroy
+syntax keyword cFunction gdraw_command_sequence_get_bounds_size gdraw_command_sequence_get_frame_by_elapsed gdraw_command_sequence_get_frame_by_index
+syntax keyword cFunction gdraw_command_sequence_get_num_frames gdraw_command_sequence_get_play_count gdraw_command_sequence_get_total_duration
+syntax keyword cFunction gdraw_command_sequence_set_bounds_size gdraw_command_sequence_set_play_count gdraw_command_set_fill_color
+syntax keyword cFunction gdraw_command_set_hidden gdraw_command_set_path_open gdraw_command_set_point
+syntax keyword cFunction gdraw_command_set_radius gdraw_command_set_stroke_color
+
 
 " Fonts
 syntax keyword cType GFont
@@ -184,18 +224,39 @@ syntax keyword cFunction fonts_get_system_font fonts_load_custom_font fonts_unlo
 syntax keyword cType GContext
 syntax keyword cFunction graphics_context_set_compositing_mode graphics_context_set_fill_color
 syntax keyword cFunction graphics_context_set_stroke_color graphics_context_set_text_color
+syntax keyword cFunction graphics_context_set_antialiased graphics_context_set_stroke_width
 
 " Graphics Types
 syntax keyword cType GBitmap GPoint GRect GSize GAlign GColor GCompOp
+syntax keyword cType GBitmapFormat GBitmapFormat1Bit GBitmapFormat8Bit GBitmapFormat1BitPalette GBitmapFormat2BitPalette
+syntax keyword cType GBitmapFormat4BitPalette GBitmapFormat8BitCircular
 syntax keyword cConstant GPointZero GRectZero GSizeZero
 syntax keyword cConstant GAlignCenter GAlignTopLeft GAlignTopRight GAlignTop GAlignLeft
 syntax keyword cConstant GAlignBottom GAlignRight GAlignBottomRight GAlignBottomLeft
 syntax keyword cConstant GColorClear GColorBlack GColorWhite
+syntax keyword cConstant PBL_COLOR GColorBlack GColorOxfordBlue GColorDukeBlue GColorBlue
+syntax keyword cConstant GColorDarkGreen GColorMidnightGreen GColorCobaltBlue GColorBlueMoon
+syntax keyword cConstant GColorIslamicGreen GColorJaegerGreen GColorTiffanyBlue GColorVividCerulean
+syntax keyword cConstant GColorGreen GColorMalachite GColorMediumSpringGreen GColorCyan
+syntax keyword cConstant GColorBulgarianRose GColorImperialPurple GColorIndigo GColorElectricUltramarine
+syntax keyword cConstant GColorArmyGreen GColorDarkGray GColorLiberty GColorVeryLightBlue
+syntax keyword cConstant GColorKellyGreen GColorMayGreen GColorCadetBlue GColorPictonBlue
+syntax keyword cConstant GColorBrightGreen GColorScreaminGreen GColorMediumAquamarine GColorElectricBlue
+syntax keyword cConstant GColorDarkCandyAppleRed GColorJazzberryJam GColorPurple GColorVividViolet
+syntax keyword cConstant GColorWindsorTan GColorRoseVale GColorPurpureus GColorLavenderIndigo
+syntax keyword cConstant GColorLimerick GColorBrass GColorLightGray GColorBabyBlueEyes
+syntax keyword cConstant GColorSpringBud GColorInchworm GColorMintGreen GColorCeleste
+syntax keyword cConstant GColorRed GColorFolly GColorFashionMagenta GColorMagenta
+syntax keyword cConstant GColorOrange GColorSunsetOrange GColorBrilliantRose GColorShockingPink
+syntax keyword cConstant GColorChromeYellow GColorRajah GColorMelon GColorRichBrilliantLavender
+syntax keyword cConstant GColorYellow GColorIcterine GColorPastelYellow GColorClearARGB8
 syntax keyword cConstant GCompOpAssign GCompOpAssignInverted GCompOpOr GCompOpAnd GCompOpClear GCompOpSet
 syntax keyword cFunction gbitmap_create_as_sub_bitmap gbitmap_create_with_data gbitmap_create_with_resource gbitmap_destroy
-syntax keyword cFunction gbitmap_create_blank
+syntax keyword cFunction gbitmap_create_blank gcolor_legible_over
 syntax keyword cFunction gpoint_equal grect_align grect_center_point grect_clip grect_contains_point
 syntax keyword cFunction grect_crop grect_equal grect_is_empty grect_standardize gsize_equal
+syntax keyword cFunction gcolor_equal GColorFromHEX GColorFromRGB gcolor_legible_over
+syntax keyword cFunction gbitmap_get_data_row_info
 
 " Animation
 syntax keyword cType Animation AnimationCurve AnimationHandlers AnimationStartedHandler AnimationStoppedHandler AnimationCurveFunction
@@ -203,15 +264,25 @@ syntax keyword cType AnimationImplementation AnimationSetupImplementation Animat
 syntax keyword cConstant AnimationCurveLinear AnimationCurveEaseIn AnimationCurveEaseOut AnimationCurveEaseInOut
 syntax keyword cConstant ANIMATION_DURATION_INFINITE ANIMATION_NORMALIZED_MAX ANIMATION_NORMALIZED_MIN
 syntax keyword cConstant AnimationCurveCustomFunction AnimationCurve_Reserved1 AnimationCurve_Reserved2 AnimationCurve_Reserved3
+syntax keyword cConstant ANIMATION_PLAY_COUNT_INFINITE
 syntax keyword cFunction animation_create animation_destroy animation_get_context animation_is_scheduled animation_schedule
 syntax keyword cFunction animation_set_curve animation_set_delay animation_set_duration animation_set_handlers
 syntax keyword cFunction animation_set_implementation animation_unschedule animation_unschedule_all animation_set_custom_curve
 
 " PropertyAnimation
-syntax keyword cType PropertyAnimation PropertyAnimationImplementation PropertyAnimationAccessors GPointReturn GRectReturn
-syntax keyword cType GPointGetter GRectGetter Int16Getter GPointSetter GRectSetter Int16Setter
+syntax keyword cType PropertyAnimation  UInt32Setter UInt32Getter
+syntax keyword cType PropertyAnimation PropertyAnimationImplementation PropertyAnimatiooPropertyAnimationAccessors GPointReturn GRectReturn
+syntax keyword cType GPointGetter GRectGetter Int16Getter GPointSetter GRectSetter Int16Setter GColor8Setter GColor8Getter
+syntax keyword cConstant property_animation_clone property_animation_get_from_grect property_animation_set_from_grect
+syntax keyword cConstant property_animation_get_from_gpoint property_animation_set_from_gpoint property_animation_get_from_int16
+syntax keyword cConstant property_animation_set_from_int16 property_animation_get_to_grect property_animation_set_to_grect
+syntax keyword cConstant property_animation_get_to_gpoint property_animation_set_to_gpoint property_animation_get_to_int16
+syntax keyword cConstant property_animation_set_to_int16 property_animation_get_subject property_animation_set_subject
 syntax keyword cFunction property_animation_create property_animation_create_layer_frame property_animation_destroy
 syntax keyword cFunction property_animation_update_gpoint property_animation_update_grect property_animation_update_int16
+syntax keyword cFunction property_animation_get_animation property_animation_subject property_animation_from property_animation_to
+syntax keyword cFunction property_animation_update_gcolor8 property_animation_create_bounds_origin property_animation_create
+syntax keyword cFunction property_animation_update_int32
 
 " Clicks
 syntax keyword cType ClickRecognizerRef ClickConfigProvider ClickHandler ButtonId
@@ -231,15 +302,19 @@ syntax keyword cConstant ACTION_BAR_WIDTH NUM_ACTION_BAR_ITEMS
 syntax keyword cFunction action_bar_layer_add_to_window action_bar_layer_clear_icon action_bar_layer_create action_bar_layer_destroy
 syntax keyword cFunction action_bar_layer_get_layer action_bar_layer_remove_from_window action_bar_layer_set_background_color
 syntax keyword cFunction action_bar_layer_set_click_config_provider action_bar_layer_set_context action_bar_layer_set_icon
+syntax keyword cFunction action_bar_layer_set_icon_animated action_bar_layer_set_icon_press_animation
+
+" ActionMenu
+syntax keyword cType ActionMenuItem ActionMenuLevel ActionMenu ActionMenuDidCloseCb ActionMenuPerformActionCb ActionMenuEachItemCb
+syntax keyword cType ActionMenuConfig ActionMenuAlign ActionMenuLevelDisplayMode
+syntax keyword cFunction action_menu_item_get_label action_menu_item_get_action_data action_menu_level_create action_menu_level_set_display_mode
+syntax keyword cFunction action_menu_level_add_action action_menu_level_add_child action_menu_hierarchy_destroy action_menu_get_context
+syntax keyword cFunction action_menu_get_root_level action_menu_open action_menu_freeze action_menu_unfreeze action_menu_set_result_window action_menu_close
 
 " BitmapLayer
 syntax keyword cType BitmapLayer
 syntax keyword cFunction bitmap_layer_create bitmap_layer_destroy bitmap_layer_get_bitmap bitmap_layer_get_layer
 syntax keyword cFunction bitmap_layer_set_alignment bitmap_layer_set_background_color bitmap_layer_set_bitmap bitmap_layer_set_compositing_mode
-
-" InverterLayer
-syntax keyword cType InverterLayer
-syntax keyword cFunction inverter_layer_create inverter_layer_destroy inverter_layer_get_layer
 
 " MenuLayer
 syntax keyword cType MenuLayer MenuIndex MenuLayerCallbacks MenuRowAlign MenuCellSpan
@@ -250,7 +325,7 @@ syntax keyword cConstant MenuRowAlignNone MenuRowAlignCenter MenuRowAlignTop Men
 syntax keyword cFunction menu_cell_basic_draw menu_cell_basic_header_draw menu_cell_title_draw menu_index_compare menu_layer_create
 syntax keyword cFunction menu_layer_destroy menu_layer_get_layer menu_layer_get_scroll_layer menu_layer_get_selected_index
 syntax keyword cFunction menu_layer_reload_data menu_layer_set_callbacks menu_layer_set_click_config_onto_window
-syntax keyword cFunction menu_layer_set_selected_index menu_layer_set_selected_next
+syntax keyword cFunction menu_layer_set_selected_index menu_layer_set_selected_next menu_layer_set_center_focused
 
 " RotBitmapLayer
 syntax keyword cType RotBitmapLayer
@@ -259,17 +334,49 @@ syntax keyword cFunction rot_bitmap_layer_destroy rot_bitmap_layer_set_corner_cl
 syntax keyword cFunction rot_bitmap_layer_set_compositing_mode
 
 " ScrollLayer
-syntax keyword cType ScrollLayer ScrollLayerCallback ScrollLayerCallbacks
+syntax keyword cType ScrollLayer ScrollLayerCallback ScrollLayerCallbacks ContentIndicatorConfig ContentIndicatorDirection
+syntax keyword cType ContentIndicator
 syntax keyword cFunction scroll_layer_add_child scroll_layer_create scroll_layer_destroy scroll_layer_get_content_offset
 syntax keyword cFunction scroll_layer_get_content_size scroll_layer_get_layer scroll_layer_get_shadow_hidden
 syntax keyword cFunction scroll_layer_scroll_down_click_handler scroll_layer_scroll_up_click_handler scroll_layer_set_callbacks
 syntax keyword cFunction scroll_layer_set_click_config_onto_window scroll_layer_set_content_offset scroll_layer_set_content_size
 syntax keyword cFunction scroll_layer_set_context scroll_layer_set_frame scroll_layer_set_shadow_hidden
+syntax keyword cFunction scroll_layer_get_content_indicator scroll_layer_get_paging scroll_layer_set_paging
+syntax keyword cFunction content_indicator_create content_indicator_destroy content_indicator_configure_direction
+syntax keyword cFunction content_indicator_get_content_available content_indicator_set_content_available
+
+
 
 " SimpleMenuLayer
 syntax keyword cType SimpleMenuLayer SimpleMenuItem SimpleMenuSection SimpleMenuLayerSelectCallback
 syntax keyword cFunction simple_menu_layer_create simple_menu_layer_destroy simple_menu_layer_get_layer simple_menu_layer_get_menu_layer
 syntax keyword cFunction simple_menu_layer_get_selected_index simple_menu_layer_set_selected_index
+syntax keyword cFunction menu_layer_set_normal_colors menu_layer_set_highlight_colors
+
+"Action Menu
+syntax keyword cType ActionMenuItem ActionMenuLevel ActionMenu ActionMenuDidCloseCb ActionMenuPerformActionCb ActionMenuEachItemCb
+syntax keyword cType ActionMenuAlign ActionMenuLevelDisplayMode ActionMenuConfig
+syntax keyword cFuntion action_menu_item_get_label action_menu_item_get_action_data action_menu_level_create
+syntax keyword cFuntion action_menu_level_set_display_mode action_menu_level_add_action action_menu_level_add_child
+syntax keyword cFuntion action_menu_hierarchy_destroy action_menu_get_context action_menu_get_root_level
+syntax keyword cFuntion action_menu_open action_menu_freeze action_menu_unfreeze action_menu_set_result_window
+syntax keyword cFuntion action_menu_close
+
+" StatusBarLayer
+syntax keyword cType StatusBarLayer
+syntax keyword cConstant StatusBarLayerSeparatorMode STATUS_BAR_LAYER_HEIGHT
+syntax keyword cFunction status_bar_layer_create status_bar_layer_destroy status_bar_layer_get_layer status_bar_layer_get_background_color
+syntax keyword cFunction status_bar_layer_get_foreground_color status_bar_layer_set_colors status_bar_layer_set_separator_mode
+
+" SmartStrap
+syntax keyword cType SmartstrapHandlers
+syntax keyword cType SmartstrapServiceId SmartstrapAttribute SmartstrapAttributeId SmartstrapServiceAvailabilityHandler
+syntax keyword cType SmartstrapReadHandler SmartstrapWriteHandler SmartstrapNotifyHandler
+syntax keyword cConstant SmartstrapResult
+syntax keyword cConstant syntaxSMARTSTRAP_TIMEOUT_DEFAULT SMARTSTRAP_RAW_DATA_SERVICE_ID SMARTSTRAP_RAW_DATA_ATTRIBUTE_ID PBL_IF_SMARTSTRAP_ELSE
+syntax keyword cFunction smartstrap_subscribe smartstrap_unsubscribe smartstrap_set_timeout smartstrap_attribute_create
+syntax keyword cFunction smartstrap_attribute_destroy smartstrap_service_is_available smartstrap_attribute_get_service_id smartstrap_attribute_get_attribute_id
+syntax keyword cFunction smartstrap_attribute_read smartstrap_attribute_begin_write smartstrap_attribute_end_write
 
 " TextLayer
 syntax keyword cType TextLayer
@@ -290,7 +397,7 @@ syntax keyword cFunction window_create window_destroy window_get_click_config_co
 syntax keyword cFunction window_get_fullscreen window_get_root_layer window_get_user_data window_is_loaded
 syntax keyword cFunction window_long_click_subscribe window_multi_click_subscribe window_raw_click_subscribe
 syntax keyword cFunction window_set_background_color window_set_click_config_provider window_set_click_config_provider_with_context
-syntax keyword cFunction window_set_click_context window_set_fullscreen window_set_status_bar_icon window_set_user_data
+syntax keyword cFunction window_set_click_context window_set_fullscreen window_set_user_data
 syntax keyword cFunction window_set_window_handlers window_single_click_subscribe window_single_repeating_click_subscribe
 
 " NumberWindow
@@ -312,6 +419,11 @@ syntax keyword cConstant E_RANGE E_DOES_NOT_EXIST E_INVALID_OPERATION E_BUSY S_T
 " Other things in pebble.h but not in the API documentation.
 syntax keyword cType ListNode GDrawState TextLayout
 syntax keyword cFunction time_ms
+
+syntax keyword cConstant GAlignCenter PBL_PLATFORM_BASALT PBL_PLATFORM_APLITE PBL_SDK_2 PBL_SDK_3
+syntax keyword cConstant PBL_PBL_ROUND PBL_RECT PBL_PLATFORM_CHALK
+syntax keyword cConstant PBL_IF_ROUND_ELSE, PBL_IF_RECT_ELSE, PBL_IF_COLOR_ELSE PBL_IF_BW_ELSE
+
 
 " Set-up the highlight links
 if version >= 508
